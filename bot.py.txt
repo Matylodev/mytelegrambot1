@@ -1,0 +1,95 @@
+from aiogram import Bot, Dispatcher, executor, types
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+
+API_TOKEN = "8541235219:AAHedBp3aWaHpkWnv8QxFs6CyUwBxEZavTQ"
+
+bot = Bot(8423670410)
+dp = Dispatcher(bot)
+
+# ====== MAIN MENU ======
+def main_menu():
+    menu = ReplyKeyboardMarkup(resize_keyboard=True)
+    menu.add(
+        KeyboardButton("Unlock EX5"), KeyboardButton("Unlock EX4")
+    )
+    menu.add(
+        KeyboardButton("Decompile EX5"), KeyboardButton("Decompile EX4")
+    )
+    menu.add(
+        KeyboardButton("Edit Comments")
+    )
+    menu.add(
+        KeyboardButton("Convert MQ5 to MQ4"), KeyboardButton("Convert MQ4 to MQ5")
+    )
+    menu.add(
+        KeyboardButton("Check File"), KeyboardButton("Check Broken")
+    )
+    menu.add(
+        KeyboardButton("Contact Us"), KeyboardButton("About Us")
+    )
+    menu.add(
+        KeyboardButton("Help")
+    )
+    return menu
+
+# ====== START BUTTON ======
+@dp.message_handler(commands=['start'])
+async def send_welcome(message: types.Message):
+    await message.answer(
+        "Welcome! Please choose an option below:",
+        reply_markup=main_menu()
+    )
+
+# ====== BUTTON HANDLERS ======
+
+@dp.message_handler(lambda message: message.text == "Unlock EX5")
+async def unlock_ex5(message: types.Message):
+    await message.answer("Send your EX5 file for unlocking.")
+
+@dp.message_handler(lambda message: message.text == "Unlock EX4")
+async def unlock_ex4(message: types.Message):
+    await message.answer("Send your EX4 file...")
+
+@dp.message_handler(lambda message: message.text == "Decompile EX5")
+async def decompile_ex5(message: types.Message):
+    await message.answer("Upload your EX5 file...")
+
+@dp.message_handler(lambda message: message.text == "Decompile EX4")
+async def decompile_ex4(message: types.Message):
+    await message.answer("Upload your EX4 file...")
+
+@dp.message_handler(lambda message: message.text == "Edit Comments")
+async def edit_comments(message: types.Message):
+    await message.answer("Send the file you want to edit...")
+
+@dp.message_handler(lambda message: message.text == "Convert MQ5 to MQ4")
+async def convert_mq5_mq4(message: types.Message):
+    await message.answer("Upload MQ5 file...")
+
+@dp.message_handler(lambda message: message.text == "Convert MQ4 to MQ5")
+async def convert_mq4_mq5(message: types.Message):
+    await message.answer("Upload MQ4 file...")
+
+@dp.message_handler(lambda message: message.text == "Check File")
+async def check_file(message: types.Message):
+    await message.answer("Send file for checking...")
+
+@dp.message_handler(lambda message: message.text == "Check Broken")
+async def check_broken(message: types.Message):
+    await message.answer("Upload broken file...")
+
+@dp.message_handler(lambda message: message.text == "Contact Us")
+async def contact_us(message: types.Message):
+    await message.answer("Message admin @Decompile_pro")
+
+@dp.message_handler(lambda message: message.text == "About Us")
+async def about_us(message: types.Message):
+    await message.answer("We provide EX4/EX5 services...")
+
+@dp.message_handler(lambda message: message.text == "Help")
+async def help_section(message: types.Message):
+    await message.answer("List of commands...")
+
+# ====== RUN BOT ======
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
